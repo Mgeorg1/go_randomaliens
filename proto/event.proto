@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "github.com/Mgeorg1/go_randomaliens/gen/pb;pb";
+
+import "google/protobuf/timestamp.proto";
+
+message FrequencyEvent {
+  string session_id = 1;
+  double frequency = 2;
+  google.protobuf.Timestamp timestamp = 3;
+}
+
+message Empty {}
+
+service FrequencyGeneratorService {
+  rpc StreamRandom(Empty) returns (stream FrequencyEvent);
+}
