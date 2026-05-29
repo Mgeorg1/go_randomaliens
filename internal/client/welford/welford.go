@@ -40,3 +40,7 @@ func (w *Welford) Clear() {
 	w.mean = 0
 	w.M2 = 0
 }
+
+func (w *Welford) Count() int {
+	return w.count
+}

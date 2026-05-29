@@ -2,6 +2,7 @@ package event_handler
 
 import (
 	"log"
+	"math"
 
 	"github.com/Mgeorg1/go_randomaliens/gen/pb"
 	"github.com/Mgeorg1/go_randomaliens/internal/client/welford"
@@ -28,17 +29,23 @@ type WelfordEventHandler struct {
 	//it is used to detect anomalies, if the diff > k * stddev, then the value is considered an anomaly
 }
 
-func NewWelfordEventHandler() *WelfordEventHandler {
-	return &WelfordEventHandler{}
+func NewWelfordEventHandler(diffK float64) *WelfordEventHandler {
+	return &WelfordEventHandler{k: diffK}
 }
 
 func (h *WelfordEventHandler) Handle(event *pb.FrequencyEvent) {
-	if h.Count > 30 {
-		diff := abs(event.Frequency - h.Mean)
-		if diff > h.k * h.StdDeviation() {
+	if h.Count() > 30 {
+		diff := math.Abs(event.Frequency - h.Mean())
+		if diff > h.k*h.StdDeviation() {
 			log.Printf("Anomaly detected: SessionID=%s, Frequency=%f, Timestamp=%s, Mean=%f, Stddev=%f",
-				event.SessionId, event.Frequency, event.Timestamp.AsTime().String(), h.Mean, h.Stddev)
+				event.SessionId, event.Frequency, event.Timestamp.AsTime().String(), h.Mean(), h.StdDeviation())
 			return
 		}
+	}
 	h.Add(event.Frequency)
+	if h.Count()%1000 == 0 {
+		log.Printf("Processed %d events: SessionID=%s, Frequency=%f, Timestamp=%s, Mean=%f, Stddev=%f",
+			h.Count, event.SessionId,
+			event.Frequency, event.Timestamp.AsTime().String(), h.Mean(), h.StdDeviation())
+	}
 }
