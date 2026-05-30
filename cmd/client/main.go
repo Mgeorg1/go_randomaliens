@@ -26,11 +26,11 @@ func main() {
 
 	addr := flag.String("addr", "127.0.0.1:50051", "The address of the gRPC server")
 	k := flag.Float64("k", 3.0, "The coefficient for anomaly detection (diff > k * stddev)")
-	dbHost := flag.String("db", "127.0.0.1", "The address of the PostgreSQL server")
+	dbHost := flag.String("db_host", "127.0.0.1", "The address of the PostgreSQL server")
 	dbPort := flag.Int("p", 5432, "The port of the PostgreSQL server")
 	dbUser := flag.String("u", "postgres", "The username for the PostgreSQL server")
 	dbPassword := flag.String("pwd", "secret", "The password for the PostgreSQL server")
-	dbName := flag.String("dbName", "randomaliens", "The name of the PostgreSQL database")
+	dbName := flag.String("db_name", "randomaliens", "The name of the PostgreSQL database")
 
 	flag.Parse()
 	if *k <= 0 {

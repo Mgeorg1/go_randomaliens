@@ -1,3 +1,13 @@
+# Go Intensive - Randomaliens
+
+Implementation of a school 21 (ex ecole 42 ecosystem) project for Go Intensive course. The main goal of this project is to get familiar with gRPC, PostgreSQL and ORM in Go. Also, it is a pretty direct approach for cases when you need to detect anomalies on a stream of data, which Go can be efficiently used for.
+
+## Usage
+1. make all
+2. ./server -addr <IP_ADDRESS>:<PORT>
+3. ./client -addr <IP_ADDRESS>:<PORT> -k <STD anomaly coefficient> -db_host <PostgreSQL host> -p <PostgreSQL port> -u <PostgreSQL user> -pwd <PostgreSQL password> -db_name <PostgreSQL database name> 
+
+
 # Team 00 - Go Intensive
 
 ## Randomaliens
@@ -125,4 +135,3 @@ If Louise is right, these anomalies could be the key to a first contact with the
 [SQL Injections](https://en.wikipedia.org/wiki/SQL_injection)
 [go-pg](https://github.com/go-pg/pg)
 [GORM](https://gorm.io/index.html)
-
