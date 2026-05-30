@@ -17,9 +17,13 @@ proto:
 clean-proto:
 	rm -rf (GEN_DIR)/*
 
-install-proto:
-	go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
-	go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+get-proto:
+	go get google.golang.org/protobuf/cmd/protoc-gen-go@latest
+	go get google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+
+get-gorm:
+	go get -u gorm.io/gorm
+	go get -u gorm.io/driver/postgres
 
 build-server:
 	go build ./$(SERVER_DIR)
@@ -28,4 +32,10 @@ build-client:
 	go build ./$(CLIENT_DIR)
 clean-server:
 	rm -rf ./server
-.PHONY: proto clean-proto install-proto build-server build-client clean-server
+
+docker-compose-up:
+	docker compose up -d
+
+all: get-proto get-gorm proto build-server build-client docker-compose-up
+
+.PHONY: proto clean-proto install-proto build-server build-client clean-server get-proto get-gorm docker-compose-up
