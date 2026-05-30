@@ -1,13 +1,13 @@
 # Go Intensive - Randomaliens
 
-Implementation of a school 21 (ex ecole 42 ecosystem) project for Go Intensive course. The main goal of this project is to get familiar with gRPC, PostgreSQL and ORM in Go. Also, it is a pretty direct approach for cases when you need to detect anomalies on a stream of data, which Go can be efficiently used for.
+Implementation of a school 21 (ex ecole 42 ecosystem) project for Go Intensive course. The main goal of this project is to get familiar with gRPC, PostgreSQL and ORM in Go. Also, it is a pretty direct approach for cases when you need to detect anomalies on a stream of data, which Go can be efficiently used for. Server generates a stream of values sampled from a normal distribution with random mean and standard deviation. Client receives this stream, reconstructs mean and standard deviation and then detects anomalies based on supplied STD anomaly coefficient. All anomalies are written into a database in PostgreSQL using ORM.
 
 ## Usage
 1. make all
 2. ./server -addr <IP_ADDRESS>:<PORT>
 3. ./client -addr <IP_ADDRESS>:<PORT> -k <STD anomaly coefficient> -db_host <PostgreSQL host> -p <PostgreSQL port> -u <PostgreSQL user> -pwd <PostgreSQL password> -db_name <PostgreSQL database name> 
 
-
+# Subject
 # Team 00 - Go Intensive
 
 ## Randomaliens
